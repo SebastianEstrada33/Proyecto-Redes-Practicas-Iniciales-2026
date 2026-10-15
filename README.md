@@ -1,68 +1,90 @@
-# Proyecto Final - Prácticas Iniciales
+# Proyecto final · Prácticas Iniciales 2026
 
-### Escuela de Práctica Supervisada, Facultad de Ingeniería
-### Universidad de San Carlos de Guatemala
+**Universidad de San Carlos de Guatemala · Facultad de Ingeniería · Escuela de Práctica Supervisada · Sección F**
 
-Este repositorio contiene la documentación y las especificaciones de diseño e implementación del Proyecto Final de Prácticas Iniciales (Sección F). El objetivo del proyecto consistió en diseñar, configurar e integrar una infraestructura de red y servicios empresariales distribuidos utilizando un esquema de virtualización robusto sobre dos servidores físicos de prueba.
+Implementación de un laboratorio de servicios de red con Windows Server, un cliente Windows y acceso desde Ubuntu. Este repositorio reúne el manual técnico, las evidencias y las pruebas del equipo.
 
----
+**Integrantes documentados:** Marco David Mérida Velásquez (202500065) y Luis Saloj. Completar los demás datos académicos que correspondan antes de la entrega.
 
-## Arquitectura y Esquema Físico
+> **Estado de avance al 15 de octubre de 2026, hora de Guatemala:** los servicios principales de la fase 1 funcionan desde Windows. Ubuntu ya accede al correo web por Tailscale; su unión al dominio está bloqueada por cifrado Kerberos y las pruebas restantes siguen pendientes. Esta documentación no declara la fase 1 completamente finalizada.
 
-La topología del proyecto se implementó utilizando dos computadoras físicas (**HOST**) interconectadas por medio de un Router/Switch. Cada HOST actúa como un servidor de virtualización, alojando en total el ecosistema completo repartido en solo 2 Servidores Virtuales y sus respectivos clientes corporativos (incluyendo un entorno Linux obligatorio).
+## Entregas
 
-### Direccionamiento IP Base:
-* **Host 1 (Físico):** `192.168.0.2`  
-  * *IPs Virtuales asociadas:* `192.168.0.10` / `192.168.0.5`
-* **Host 2 (Físico):** `192.168.0.4`  
-  * *IPs Virtuales asociadas:* `192.168.0.15` / `192.168.0.20`
+| Fase | Puntos del enunciado | Fecha |
+|---|---|---|
+| 1 | 1, 2, 3, 4, 6 y 8 | 15/10/2026 |
+| 2 | 5, 7, 9 y 10, integrados con fase 1 | 29/10/2026 |
 
----
+La impresora compartida del punto 3 se evalúa en la fase 2, según la nota del enunciado.
 
-## Servicios Configurados
+## Navegación
 
-### 1. Gestión de Identidades y Red (Active Directory & DHCP)
-* **Dominio Principal:** Configuración del servicio de Active Directory (AD) y DNS bajo el dominio local `servidor1.com`.
-* **Usuarios del Dominio:** Creación y provisión de cuentas base (`usuario1` y `usuario2`) integradas globalmente.
-* **Políticas de Grupo (GPO):**
-  * Despliegue automatizado del fondo de pantalla institucional (Logo de la universidad) al iniciar sesión en el dominio.
-  * Implementación de políticas aplicables avanzadas en beneficio de la organización en sustitución de la directiva heredada de Internet Explorer (depreciada en Windows Server 2012).
-* **Servidor de IPs Dinámicas (DHCP):** Configurado sobre el segmento `192.168.0.1` al `192.168.0.100`.
-  * *Rango Reservado (Estáticas):* `192.168.0.1` a `192.168.0.25`.
-  * *Rango Dinámico (Pool):* `192.168.0.26` a `192.168.0.100`.
+- [Arquitectura, equipos y direccionamiento](docs/01-arquitectura.md)
+- [Manual de configuración de la fase 1](docs/02-manual-fase1.md)
+- [Plan de pruebas y estado por requisito](docs/03-pruebas-y-pendientes.md)
+- [Conexión remota y preparación de Ubuntu](docs/04-tailscale-ubuntu.md)
+- [Incidencias resueltas y diagnóstico pendiente](docs/05-incidencias.md)
+- [Galería de 22 evidencias](evidencias/README.md)
+- [Referencias técnicas](docs/06-referencias.md)
+- [Diagnóstico Windows, solo lectura](scripts/windows/Diagnostico-Fase1.ps1)
+- [Diagnóstico Ubuntu, solo lectura](scripts/ubuntu/diagnostico.sh)
 
-### 2. Recursos Compartidos y Almacenamiento (File System Server)
-* **CarpetaPrivada:** Espacio restringido exclusivo para usuarios con credenciales administrativas (`usuario=privado` y `contrasena=privado`) con permisos de lectura, modificación y eliminación.
-* **CarpetaPublica:** Directorio de acceso libre y colaborativo para todos los usuarios del dominio para copiar, eliminar y modificar archivos.
-* **Impresora Compartida:** Recurso compartido instalado físicamente en la computadora donde se encuentra virtualizado el servidor web, habilitado para la cola de impresión corporativa.
+## Servicios implementados
 
-### 3. Infraestructura de Correo Electrónico (Doble Entorno)
-* **Servicios Nativos (POP3/SMTP):** Plataforma de mensajería liviana integrada directamente con el Primary Domain Controller (PDC) de `servidor1.com`. Se implementó una solución alternativa de terceros para suplir el rol POP3 ausente de forma nativa en Windows Server 2012. Pruebas de buzón validadas mediante clientes multiplataforma como Thunderbird.
-* **Microsoft Exchange Server:** Entorno robusto de mensajería aislado operando en un nuevo dominio (`servidor2.com`) y asignando el dominio de correos `correo2.com`. Dispone de acceso Webmail protegido; ante credenciales erróneas, el portal deniega el acceso con la cadena exacta: `"DATOS INCORRECTOS DE AUTENTICACION"`.
+| Punto | Implementación | Estado comprobado |
+|---|---|---|
+| 1. Virtualización | VirtualBox; SRV-PRINCIPAL y CLI-WINDOWS01 en Intel; SRV-SECUNDARIO en equipo de Luis | Revisar requisito de cliente virtual en segundo HOST |
+| 2. Usuarios | AD DS, DNS, DHCP y GPO en `servidor1.com` | Funcional en Windows; unión de Ubuntu pendiente |
+| 3. Recursos | `CarpetaPública` y `CarpetaPrivada`, permisos SMB y NTFS | Pruebas Windows confirmadas; Linux pendiente |
+| 4. Correo | hMailServer, cuentas AD, POP3/SMTP; Roundcube como webmail | Correo web Windows en ambos sentidos; envío desde Ubuntu confirmado; Thunderbird pendiente |
+| 6. Web | IIS público, privado en 1080 y redirección `/correo` | Funcional; respuesta 302 confirmada desde Ubuntu |
+| 8. FTP | FTP nativo de IIS para usuario1 y usuario2 | Operaciones en Windows confirmadas; Linux pendiente |
 
-### 4. Servidor Web (IIS) y Transferencia de Archivos
-Alojado bajo Internet Information Services (IIS) en la dirección virtual de servicios (`192.168.0.20`):
-* **Sitio Público (publicweb):** Mapeado en `C:\Inetpub\wwwroot\publicweb`, desplegando el mensaje *"Carpeta Pública"*.
-* **Sitio Privado (privadaweb):** Publicado restrictivamente en el puerto `1080` bajo la ruta `C:\Inetpub\wwwroot\privadaweb` con acceso para el usuario `privado`.
-* **Redireccionamiento de Correo (correo):** Configuración de redirección avanzada de HTTP (forward) a nivel de IIS hacia el portal de Webmail corporativo.
-* **FTP & Telnet Nativos:** Servicios de administración remota por consola y transferencia segura de archivos indexados directamente hacia la carpeta pública con privilegios para `usuario1` y `usuario2`.
+## Arquitectura actual
 
-### 5. Acceso Remoto y Seguridad (Proxy & RDP)
-* **Control Remoto:** Activación de Escritorio Remoto (RDP) en el servidor Exchange para el usuario administrador y aprovisionamiento obligatorio de la característica de RDP vía Web.
-* **Servidor Proxy Perimetral:** Implementado a través del rol de Web Application Proxy (WAP) en Windows Server 2012 ante la remoción de las herramientas tradicionales.
-  * Escucha en el puerto `8080`.
-  * Exige autenticación obligatoria delegada contra el Active Directory.
-  * Manejo de excepciones de inicio de sesión con el mensaje: `"DATOS INCORRECTOS DE AUTENTICACION"`.
+```mermaid
+flowchart TB
+    U["Ubuntu físico · Luis"] -->|Tailscale| H["Intel Windows · Mark"]
+    H -->|"Ruta de laboratorio /32"| S["SRV-PRINCIPAL · 192.168.0.20"]
+    C["CLI-WINDOWS01 · DHCP"] -->|Host-only| S
+    U -. "VirtualBox · NAT" .-> B["SRV-SECUNDARIO · fase 2"]
+```
 
----
+El diagrama representa el estado actual. El servidor secundario en NAT todavía no tiene integración de servicios acreditada. El enunciado pide un servidor y un cliente virtual por HOST: el Ubuntu físico de Luis requiere resolver esa diferencia o confirmar su aceptación con el auxiliar.
 
-## Guía de Despliegue y Verificación
+## Accesos del laboratorio
 
-Para simular o auditar el entorno montado en producción:
+| Servicio | Dirección |
+|---|---|
+| Web pública | `http://192.168.0.20/publicweb/` |
+| Web privada | `http://192.168.0.20:1080/privadaweb/` |
+| Entrada de correo | `http://192.168.0.20/correo` |
+| Webmail | `http://192.168.0.20/webmail/` |
+| FTP | `ftp://192.168.0.20` |
+| SMB público | `\\192.168.0.20\CarpetaPública` |
+| SMB privado | `\\192.168.0.20\CarpetaPrivada` |
 
-1. **Fase de Virtualización:** Inicializar los entornos virtuales en los dos HOST físicos asegurando que las interfaces de red interna apunten al switch lógico común en el segmento `192.168.0.0/24`.
-2. **Validación de Identidad:** Iniciar el cliente Linux obligatorio unido al dominio y verificar la resolución de nombres DNS. Comprobar la asignación dinámica de direccionamiento IP mediante DHCP dentro del rango `.26` a `.100`.
-3. **Comprobación de Sitios Web:**
-   * Navegar a `192.168.0.20` para observar el index público.
-   * Navegar a `192.168.0.20` e ingresar credenciales válidas para el entorno restringido.
-4. **Prueba de Mensajería:** Realizar un envío de correo de prueba entre las cuentas configuradas utilizando el cliente de correo en el entorno Linux corporativo.
+Las direcciones son privadas: requieren estar en el laboratorio o tener acceso autorizado mediante Tailscale. El correo probado es interno, entre cuentas del laboratorio.
+
+## Evidencias destacadas
+
+### Dominio y DNS
+![Dominio y resolución DNS](evidencias/02-dominio-dns.png)
+
+### Políticas aplicadas al cliente
+![GPO aplicada en CLI-WINDOWS01](evidencias/05-gpo-aplicada.png)
+
+### Correo enviado y recibido
+![Respuesta recibida en Roundcube](evidencias/17-correo-respuesta.png)
+
+### Registros LDAP comprobados localmente
+![Consultas LDAP en SRV-PRINCIPAL](evidencias/21-ldap-resolucion-local.png)
+
+## Cómo utilizar el repositorio
+
+1. Leer la arquitectura antes de cambiar direcciones o adaptadores.
+2. Consultar el manual por servicio; los procedimientos describen el montaje realizado y las verificaciones necesarias.
+3. Ejecutar los diagnósticos en el equipo indicado y revisar los resultados antes de aplicar correcciones.
+4. Completar la matriz de pruebas y añadir evidencia de los pendientes cuando se realicen.
+
+Los scripts incluidos consultan información: no instalan roles ni cambian la red. No se incluyen ISOs, discos virtuales, bases de datos de correo, contraseñas, claves de Tailscale ni archivos privados de configuración. El repositorio documenta un laboratorio académico con sistemas heredados y protocolos sin TLS; su conectividad se mantiene dentro del laboratorio y la VPN.

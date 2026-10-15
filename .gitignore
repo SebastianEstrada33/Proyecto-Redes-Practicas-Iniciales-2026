@@ -1,0 +1,28 @@
+# Medios y discos virtuales
+*.iso
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.ova
+*.ovf
+*.sav
+# Configuraciones reales y secretos
+.env
+.env.*
+!.env.example
+config.inc.php
+sssd.conf
+*.key
+*.pem
+*.pfx
+*.p12
+# Bases de datos, buzones, logs y archivos de trabajo
+*.db
+*.sqlite
+*.sqlite3
+*.log
+*.bak
+.DS_Store
+Thumbs.db
+__pycache__/
