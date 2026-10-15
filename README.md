@@ -1,4 +1,4 @@
-# Proyecto final · Prácticas Iniciales 2026
+# Proyecto final · Prácticas Iniciales 2026 
 
 **Universidad de San Carlos de Guatemala · Facultad de Ingeniería · Escuela de Práctica Supervisada · Sección F**
 
