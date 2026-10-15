@@ -2,6 +2,10 @@
 
 [Inicio del proyecto](../README.md) · [Evidencias](../evidencias/README.md) · [Scripts](../scripts/README.md)
 
+## Entrega de fase 1
+
+[Informe, guion y lista de cierre](../entrega-fase-1/README.md).
+
 ## Recorrido recomendado
 
 | Orden | Documento | Para qué sirve |

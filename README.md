@@ -4,9 +4,9 @@
 
 Implementación de un laboratorio de servicios de red con Windows Server, un cliente Windows y acceso desde Ubuntu. Este repositorio reúne el manual técnico, las evidencias y las pruebas del equipo.
 
-**Integrantes documentados:** Marco David Mérida Velásquez (202500065) y Luis Saloj. Completar los demás datos académicos que correspondan antes de la entrega.
+**Integrantes documentados:** Marco David Mérida Velásquez (202500065) y Luis Saloj.
 
-> **Estado de avance al 15 de octubre de 2026, hora de Guatemala:** los servicios principales de la fase 1 funcionan desde Windows. Ubuntu ya accede al correo web por Tailscale; su unión al dominio sigue bloqueada por cifrado Kerberos incluso después de habilitar AES en Administrador; falta la prueba kinit y las verificaciones restantes. Esta documentación no declara la fase 1 completamente finalizada.
+> **Entrega de fase 1 · 15/10/2026:** [informe de implementación](entrega-fase-1/informe.md), [manual técnico](docs/02-manual-fase1.md), [evidencias](evidencias/README.md) y [guion de demostración](entrega-fase-1/demostracion.md). El alcance comprobado y las validaciones de cierre se detallan en la [matriz de pruebas](docs/03-pruebas-y-pendientes.md).
 
 ## Entregas
 
@@ -21,6 +21,7 @@ La impresora compartida del punto 3 se evalúa en la fase 2, según la nota del 
 
 | Ubicación | Contenido |
 |---|---|
+| [entrega-fase-1/](entrega-fase-1/README.md) | Informe, guion de demostración y lista de cierre para la entrega |
 | [docs/](docs/README.md) | Arquitectura, manual de fase 1, pruebas, Ubuntu, incidencias, referencias y reparto de tareas |
 | [evidencias/](evidencias/README.md) | 22 capturas originales agrupadas por los puntos 1, 2, 3, 4, 6 y 8 |
 | [scripts/](scripts/README.md) | Diagnósticos separados para Windows Server y Ubuntu |
