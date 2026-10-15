@@ -62,7 +62,7 @@ Luis ejecutó las dos consultas UDP con +noedns y ambas devolvieron NOERROR, des
 
 ## Unión al dominio: procedimiento pendiente
 
-El primer intento ya llegó al controlador y falló con `KDC has no support for encryption type`. Mark habilitó AES128/AES256 para Administrador (atributo final 24), sin cambiar su contraseña. No se ha recibido el resultado del reintento. Verificar hora y conectividad; el siguiente bloque describe el procedimiento, todavía sin unión exitosa acreditada:
+El primer intento ya llegó al controlador y falló con `KDC has no support for encryption type`. Mark habilitó AES128/AES256 para Administrador (atributo final 24), sin cambiar su contraseña. El reintento devolvió el mismo error; falta la prueba kinit con traza. Verificar hora y conectividad; el siguiente bloque describe el procedimiento, todavía sin unión exitosa acreditada:
 
 ```bash
 timedatectl
@@ -97,6 +97,10 @@ La unión posterior autenticó contra el DC seleccionado pero falló al negociar
 Set-ADUser -Identity Administrador -KerberosEncryptionType AES128,AES256
 ```
 
-El atributo final msDS-SupportedEncryptionTypes es 24. No se ha cambiado la contraseña ni se ha comprobado aún que ese ajuste baste. Algunas cuentas pueden necesitar regeneración de claves AES; no habilitar cifrados antiguos globalmente para ocultar el fallo.
+El atributo final msDS-SupportedEncryptionTypes es 24. No se ha cambiado la contraseña. El reintento confirmó que ese ajuste por sí solo no bastó. Algunas cuentas pueden necesitar regeneración de claves AES; no habilitar cifrados antiguos globalmente para ocultar el fallo.
 
-[Evidencia del cambio AES](../evidencias/22-kerberos-aes-administrador.png).
+[Evidencia del cambio AES](../evidencias/02-usuarios-dns-dhcp-gpo/22-kerberos-aes-administrador.png).
+
+## Último paso indicado: diagnóstico de tickets
+
+Luis informó que no tiene kinit disponible. Se indicó instalar krb5-user y ejecutar `KRB5_TRACE=/dev/stderr kinit Administrador@SERVIDOR1.COM`; si funciona, comprobar `klist -e`. No se recibió aún la salida. En Windows, las dos consultas de valores explícitos de cifrado en el registro no mostraron resultados; eso no demuestra por sí solo ausencia de toda política de cifrado.

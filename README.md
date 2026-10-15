@@ -6,7 +6,7 @@ Implementación de un laboratorio de servicios de red con Windows Server, un cli
 
 **Integrantes documentados:** Marco David Mérida Velásquez (202500065) y Luis Saloj. Completar los demás datos académicos que correspondan antes de la entrega.
 
-> **Estado de avance al 15 de octubre de 2026, hora de Guatemala:** los servicios principales de la fase 1 funcionan desde Windows. Ubuntu ya accede al correo web por Tailscale; su unión al dominio está bloqueada por cifrado Kerberos y las pruebas restantes siguen pendientes. Esta documentación no declara la fase 1 completamente finalizada.
+> **Estado de avance al 15 de octubre de 2026, hora de Guatemala:** los servicios principales de la fase 1 funcionan desde Windows. Ubuntu ya accede al correo web por Tailscale; su unión al dominio sigue bloqueada por cifrado Kerberos incluso después de habilitar AES en Administrador; falta la prueba kinit y las verificaciones restantes. Esta documentación no declara la fase 1 completamente finalizada.
 
 ## Entregas
 
@@ -17,17 +17,19 @@ Implementación de un laboratorio de servicios de red con Windows Server, un cli
 
 La impresora compartida del punto 3 se evalúa en la fase 2, según la nota del enunciado.
 
-## Navegación
+## Dónde encontrar cada cosa
 
-- [Arquitectura, equipos y direccionamiento](docs/01-arquitectura.md)
-- [Manual de configuración de la fase 1](docs/02-manual-fase1.md)
-- [Plan de pruebas y estado por requisito](docs/03-pruebas-y-pendientes.md)
-- [Conexión remota y preparación de Ubuntu](docs/04-tailscale-ubuntu.md)
-- [Incidencias resueltas y diagnóstico pendiente](docs/05-incidencias.md)
-- [Galería de 22 evidencias](evidencias/README.md)
-- [Referencias técnicas](docs/06-referencias.md)
-- [Diagnóstico Windows, solo lectura](scripts/windows/Diagnostico-Fase1.ps1)
-- [Diagnóstico Ubuntu, solo lectura](scripts/ubuntu/diagnostico.sh)
+| Ubicación | Contenido |
+|---|---|
+| [docs/](docs/README.md) | Arquitectura, manual de fase 1, pruebas, Ubuntu, incidencias, referencias y reparto de tareas |
+| [evidencias/](evidencias/README.md) | 22 capturas originales agrupadas por los puntos 1, 2, 3, 4, 6 y 8 |
+| [scripts/](scripts/README.md) | Diagnósticos separados para Windows Server y Ubuntu |
+| [configuracion/](configuracion/README.md) | Ubicaciones y parámetros de configuración documentados |
+| [fase-2/](fase-2/README.md) | Planificación de Exchange, Telnet, RDP, proxy e impresora |
+
+**Para estudiar:** [arquitectura](docs/01-arquitectura.md) → [manual](docs/02-manual-fase1.md) → [evidencias](evidencias/README.md).
+
+**Para continuar trabajando:** [pendientes](docs/03-pruebas-y-pendientes.md) → [tareas de Mark y Luis](docs/07-distribucion-trabajo.md) → [diagnóstico Ubuntu](docs/04-tailscale-ubuntu.md).
 
 ## Servicios implementados
 
@@ -69,16 +71,16 @@ Las direcciones son privadas: requieren estar en el laboratorio o tener acceso a
 ## Evidencias destacadas
 
 ### Dominio y DNS
-![Dominio y resolución DNS](evidencias/02-dominio-dns.png)
+![Dominio y resolución DNS](evidencias/02-usuarios-dns-dhcp-gpo/02-dominio-dns.png)
 
 ### Políticas aplicadas al cliente
-![GPO aplicada en CLI-WINDOWS01](evidencias/05-gpo-aplicada.png)
+![GPO aplicada en CLI-WINDOWS01](evidencias/02-usuarios-dns-dhcp-gpo/05-gpo-aplicada.png)
 
 ### Correo enviado y recibido
-![Respuesta recibida en Roundcube](evidencias/17-correo-respuesta.png)
+![Respuesta recibida en Roundcube](evidencias/04-correo/17-correo-respuesta.png)
 
 ### Registros LDAP comprobados localmente
-![Consultas LDAP en SRV-PRINCIPAL](evidencias/21-ldap-resolucion-local.png)
+![Consultas LDAP en SRV-PRINCIPAL](evidencias/02-usuarios-dns-dhcp-gpo/21-ldap-resolucion-local.png)
 
 ## Cómo utilizar el repositorio
 

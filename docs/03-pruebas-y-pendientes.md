@@ -24,14 +24,14 @@
 | DNS A y Kerberos SRV desde Ubuntu | Confirmado por Luis | Conservar salida/captura |
 | LDAP SRV desde Ubuntu | Ambas consultas responden NOERROR con +noedns | Revisar EDNS si vuelve el error |
 | LDAP SRV local en servidor | Correcto en ambas consultas | No recrear registros sin diagnóstico |
-| Unión Ubuntu al dominio | Falló por KDC has no support for encryption type | Mark habilitó AES128/AES256 en Administrador; Luis debe reintentar |
+| Unión Ubuntu al dominio | Falló por KDC has no support for encryption type | Reintento falló igualmente; falta prueba kinit con traza |
 | Autenticación Linux y ≥2 funcionalidades | Pendiente | Luis |
 | Thunderbird ambas cuentas POP3/SMTP | Pendiente | Luis |
 | Reinicio y persistencia de rutas/DNS | Sin prueba completa | Ambos |
 
 ## Orden de cierre de fase 1
 
-1. Reintentar unión al dominio tras habilitar AES; si persiste el error Kerberos, revisar claves y políticas antes de nuevos cambios.
+1. Obtener prueba kinit con traza desde Ubuntu y resolver negociación Kerberos; AES=24 no bastó.
 2. Unir Ubuntu al dominio, verificar usuario AD y al menos dos funciones del enunciado.
 3. Probar Thunderbird con las dos cuentas, incluyendo POP3 y SMTP.
 4. Probar SMB, webs y FTP desde Ubuntu y añadir capturas.

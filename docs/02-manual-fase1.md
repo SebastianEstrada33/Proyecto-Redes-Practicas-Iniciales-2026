@@ -12,7 +12,7 @@ El servidor tiene IP 192.168.0.20/24. Para la topología actual, usar el adaptad
 
 **Validación:** encender servidor antes que cliente; comprobar adaptadores e IP del cliente y ejecutar `Test-NetConnection 192.168.0.20 -Port 80` desde el HOST. El resultado confirmado utilizó origen 192.168.0.200 e interfaz Ethernet.
 
-**Evidencia:** [creación de VM](../evidencias/01-virtualizacion.png).
+**Evidencia:** [creación de VM](../evidencias/01-virtualizacion/01-virtualizacion.png).
 
 ## 2. Active Directory y DNS
 
@@ -36,7 +36,7 @@ Resolve-DnsName _ldap._tcp.dc._msdcs.servidor1.com -Type SRV -Server 127.0.0.1
 
 Las zonas `servidor1.com` y `_msdcs.servidor1.com` están integradas en AD. Los registros LDAP locales responden con destino srv-principal.servidor1.com, puerto 389 e IP 192.168.0.20. Las dos consultas LDAP desde Ubuntu respondieron NOERROR al usar +noedns; falta confirmar el comportamiento normal del resolver.
 
-**Evidencias:** [dominio](../evidencias/02-dominio-dns.png), [usuarios](../evidencias/04-usuarios-ad.png), [LDAP](../evidencias/21-ldap-resolucion-local.png).
+**Evidencias:** [dominio](../evidencias/02-usuarios-dns-dhcp-gpo/02-dominio-dns.png), [usuarios](../evidencias/02-usuarios-dns-dhcp-gpo/04-usuarios-ad.png), [LDAP](../evidencias/02-usuarios-dns-dhcp-gpo/21-ldap-resolucion-local.png).
 
 ## 3. Políticas de grupo
 
@@ -58,7 +58,7 @@ gpresult /r
 
 Cerrar sesión y entrar de nuevo para observar el fondo. Intentar abrir Panel de control: debe mostrarse la restricción. No basta con que la GPO exista en el servidor.
 
-**Evidencias:** [gpresult](../evidencias/05-gpo-aplicada.png), [fondo](../evidencias/06-fondo-institucional.png), [restricción](../evidencias/07-gpo-restriccion.png).
+**Evidencias:** [gpresult](../evidencias/02-usuarios-dns-dhcp-gpo/05-gpo-aplicada.png), [fondo](../evidencias/02-usuarios-dns-dhcp-gpo/06-fondo-institucional.png), [restricción](../evidencias/02-usuarios-dns-dhcp-gpo/07-gpo-restriccion.png).
 
 ## 4. DHCP
 
@@ -73,7 +73,7 @@ Get-DhcpServerv4Lease -ScopeId 192.168.0.0
 
 En cliente Windows, usar dirección automática y comprobar `ipconfig /all`. Se observó .26. Repetir después de la migración a host-only y comprobar concesión en el servidor. Una IP fija correcta no demuestra DHCP.
 
-**Evidencia:** [ámbito y exclusión](../evidencias/03-dhcp.png).
+**Evidencia:** [ámbito y exclusión](../evidencias/02-usuarios-dns-dhcp-gpo/03-dhcp.png).
 
 ## 5. Recursos SMB y permisos NTFS
 
@@ -94,7 +94,7 @@ icacls C:\Inetpub\wwwroot\publicweb
 icacls C:\Inetpub\wwwroot\privadaweb
 ```
 
-Las pruebas de modificación y denegación desde Windows fueron confirmadas por el equipo. Falta capturarlas de forma completa desde Linux. [Permisos privados](../evidencias/08-carpeta-privada-permisos.png).
+Las pruebas de modificación y denegación desde Windows fueron confirmadas por el equipo. Falta capturarlas de forma completa desde Linux. [Permisos privados](../evidencias/03-recursos-compartidos/08-carpeta-privada-permisos.png).
 
 ## 6. IIS público, privado y redirección
 
@@ -112,7 +112,7 @@ El siguiente comando refleja la configuración aplicada de la redirección; ejec
 
 Pruebas: acceso público sin credenciales; privado con usuario autorizado y con credenciales incorrectas; `/correo` debe responder 302 y abrir Roundcube. Luis obtuvo `Location: http://192.168.0.20/webmail` desde Ubuntu.
 
-**Evidencias:** [público](../evidencias/09-web-publica.png), [privado](../evidencias/10-web-privada.png), [webmail cliente](../evidencias/18-webmail-cliente.png).
+**Evidencias:** [público](../evidencias/06-web-iis/09-web-publica.png), [privado](../evidencias/06-web-iis/10-web-privada.png), [webmail cliente](../evidencias/04-correo/18-webmail-cliente.png).
 
 ## 7. FTP nativo de IIS
 
@@ -122,7 +122,7 @@ Se configuró intervalo pasivo 50000–50010. Las reglas de firewall del laborat
 
 Para cada usuario, conectar, listar, descargar un archivo existente, subir otro y eliminar únicamente el archivo de prueba. Se comprobaron las operaciones localmente y desde Windows; la prueba remota de Luis debe utilizar modo pasivo, ya que los flujos de FTP activo pueden necesitar conexiones entrantes al cliente.
 
-**Evidencias:** [usuario1](../evidencias/11-ftp-usuario1.png), [usuario2](../evidencias/12-ftp-usuario2.png), [pasivo](../evidencias/13-ftp-pasivo.png), [cliente](../evidencias/14-ftp-cliente-windows.png).
+**Evidencias:** [usuario1](../evidencias/08-ftp/11-ftp-usuario1.png), [usuario2](../evidencias/08-ftp/12-ftp-usuario2.png), [pasivo](../evidencias/08-ftp/13-ftp-pasivo.png), [cliente](../evidencias/08-ftp/14-ftp-cliente-windows.png).
 
 ## 8. hMailServer y cuentas AD
 
@@ -139,7 +139,7 @@ netstat -ano | Select-String ':25\s|:110\s|:143\s'
 
 POP3 se implementó con hMailServer porque el enunciado permite investigar una alternativa al rol eliminado de Windows Server 2012. La prueba POP local devolvió mensajes en correo2. SMTP entregó correos de prueba; Roundcube comprobó recepción y respuesta.
 
-**Evidencia:** [integración AD y listeners](../evidencias/15-correo-integracion-ad.png).
+**Evidencia:** [integración AD y listeners](../evidencias/04-correo/15-correo-integracion-ad.png).
 
 ## 9. PHP y Roundcube
 
@@ -156,7 +156,7 @@ Componentes utilizados: PHP 8.3.35 x64 NTS VS16 y Roundcube 1.6.19 Complete. Se 
 
 Se dejó la detección MIME apuntando a `C:/RoundcubeData/mime.types`, generada a partir de los tipos de IIS. El acceso al instalador después del cierre devolvió 404, confirmado por el equipo. No se acreditó todavía prueba de adjuntos.
 
-**Evidencias:** [validación SQLite y directorios](../evidencias/16-roundcube-validacion.png), [respuesta recibida](../evidencias/17-correo-respuesta.png).
+**Evidencias:** [validación SQLite y directorios](../evidencias/04-correo/16-roundcube-validacion.png), [respuesta recibida](../evidencias/04-correo/17-correo-respuesta.png).
 
 ## 10. Cliente de correo Linux pendiente
 

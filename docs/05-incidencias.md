@@ -18,7 +18,7 @@
 | SQLite usaba ruta incorrecta | DSN absoluto Windows sqlite:///C:/RoundcubeData/roundcube.db | Pruebas de esquema/escritura OK |
 | Instalador Roundcube accesible | Deshabilitado en configuración y bloqueado en requestFiltering | Equipo confirmó 404 al finalizar |
 | LDAP SRV remoto FORMERR | Ambas consultas funcionan con +noedns | Consulta sin EDNS confirmada; causa precisa pendiente |
-| Unión AD falla por cifrado Kerberos | Administrador tenía el atributo de tipos vacío; se configuró AES128 y AES256 (valor 24), sin cambiar contraseña | Falta resultado del nuevo intento de Luis |
+| Unión AD falla por cifrado Kerberos | Administrador tenía el atributo de tipos vacío; se configuró AES128 y AES256 (valor 24), sin cambiar contraseña | El reintento falló igual; pendiente traza kinit |
 
 ## Diagnóstico del perfil de red
 

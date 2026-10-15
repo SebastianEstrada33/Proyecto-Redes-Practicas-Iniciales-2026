@@ -1,111 +1,111 @@
 [
   {
-    "archivo": "01-virtualizacion.png",
+    "archivo": "01-virtualizacion/01-virtualizacion.png",
     "origen": "image(20261012-233205).png",
     "sha256": "8739a9577230234f017255aaeff57069f99c5579300eb68a13a81764ec7a775c"
   },
   {
-    "archivo": "02-dominio-dns.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/02-dominio-dns.png",
     "origen": "image(20261013-173549).png",
     "sha256": "3ee5a4ac33a23a7ba4f8c74950a11003dad82a65e810e30b617fa496aa5747bc"
   },
   {
-    "archivo": "03-dhcp.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/03-dhcp.png",
     "origen": "image(20261013-183431).png",
     "sha256": "22a5f97e5629f5d964879b377701e6feef8bd39bb49bfb7a008d7fe48860144b"
   },
   {
-    "archivo": "04-usuarios-ad.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/04-usuarios-ad.png",
     "origen": "image(20261014-024249).png",
     "sha256": "caae14180f3a29d574c1e1c5e6275b98586f0d5e60e4c70913d422f633767714"
   },
   {
-    "archivo": "05-gpo-aplicada.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/05-gpo-aplicada.png",
     "origen": "image(20261014-045026).png",
     "sha256": "64c26905bc7a90a26f33922382d646ed9d2a3fd68e2db619d475174c1bbd7006"
   },
   {
-    "archivo": "06-fondo-institucional.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/06-fondo-institucional.png",
     "origen": "image(20261014-044542).png",
     "sha256": "75f62219bd9bd7dcbd358f7b9823dc72b3f246759c19e1605baa17b72e224f10"
   },
   {
-    "archivo": "07-gpo-restriccion.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/07-gpo-restriccion.png",
     "origen": "image(20261014-222631).png",
     "sha256": "5f604fa1a152d3e95945dbdaea71fee76e44c1c437f3a55a3e3b1674d37e384f"
   },
   {
-    "archivo": "08-carpeta-privada-permisos.png",
+    "archivo": "03-recursos-compartidos/08-carpeta-privada-permisos.png",
     "origen": "image(20261013-232703).png",
     "sha256": "01388d6136939377b74d718a77fc79e3216b76c50fd5858598ff31279e9d9e35"
   },
   {
-    "archivo": "09-web-publica.png",
+    "archivo": "06-web-iis/09-web-publica.png",
     "origen": "image(20261013-234155).png",
     "sha256": "5bddfcfb37a887055d89549cac63b815025f5570ddc5b8352bd141afc247b741"
   },
   {
-    "archivo": "10-web-privada.png",
+    "archivo": "06-web-iis/10-web-privada.png",
     "origen": "image(20261014-011228).png",
     "sha256": "18492c20faa516d5533f2e63e426a05038558265aa839ef611cc3d9bb0521db6"
   },
   {
-    "archivo": "11-ftp-usuario1.png",
+    "archivo": "08-ftp/11-ftp-usuario1.png",
     "origen": "image(20261014-015152).png",
     "sha256": "c7a261801a168dd58009be0bd9dad72faf15110f9b5dab7a7a3ec04624e2b332"
   },
   {
-    "archivo": "12-ftp-usuario2.png",
+    "archivo": "08-ftp/12-ftp-usuario2.png",
     "origen": "image(20261014-015719).png",
     "sha256": "6308366fcf98dbcc84b475795f94821909a11a3028c568507568280e37675796"
   },
   {
-    "archivo": "13-ftp-pasivo.png",
+    "archivo": "08-ftp/13-ftp-pasivo.png",
     "origen": "image(20261014-020032).png",
     "sha256": "22557a2d6ad75c7785bbc5e461285530e0aaa053fdb120d9997c516fbe1d2bf9"
   },
   {
-    "archivo": "14-ftp-cliente-windows.png",
+    "archivo": "08-ftp/14-ftp-cliente-windows.png",
     "origen": "image(20261014-052601).png",
     "sha256": "fd736db78fb7ecaffbaef84a60f97f130d0773c11a1c773635a8f0e6bc3ac186"
   },
   {
-    "archivo": "15-correo-integracion-ad.png",
+    "archivo": "04-correo/15-correo-integracion-ad.png",
     "origen": "image(20261015-013131-1).png",
     "sha256": "bda690ef4b0ac932fc5c5071f23ab7033361db7a852ab870d6fa36a9dbabd34b"
   },
   {
-    "archivo": "16-roundcube-validacion.png",
+    "archivo": "04-correo/16-roundcube-validacion.png",
     "origen": "image(20261015-034022).png",
     "sha256": "00b3518fd5d1dad0097b73503f32edb7371047134ff5cdb6fd6e307d3e1d8ac4"
   },
   {
-    "archivo": "17-correo-respuesta.png",
+    "archivo": "04-correo/17-correo-respuesta.png",
     "origen": "image(20261015-035526).png",
     "sha256": "69cb5a24b33c75d03eacb8862d502bc79ceef9a9dc5a4256c094fd62bbea9aa5"
   },
   {
-    "archivo": "18-webmail-cliente.png",
+    "archivo": "04-correo/18-webmail-cliente.png",
     "origen": "image(20261015-035910).png",
     "sha256": "a0976a9b95bb54de102af3d964b474eab20d66981642043fed03ca482bd52eb4"
   },
   {
-    "archivo": "19-zonas-dns.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/19-zonas-dns.png",
     "origen": "image(20261015-054553).png",
     "sha256": "9b09cb5af3f263ed15ce90b63aa6b847fbeb4188b359130ce4cf74e7535b0cde"
   },
   {
-    "archivo": "20-registros-srv.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/20-registros-srv.png",
     "origen": "image(20261015-054620).png",
     "sha256": "341a21f4b480a2a2734ab1f330c30dcd282aa8d4dc21b4eabf508414de1194a5"
   },
   {
-    "archivo": "21-ldap-resolucion-local.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/21-ldap-resolucion-local.png",
     "origen": "image(20261015-054640).png",
     "sha256": "714f3a1a74f07743a19420538ca8cffa609cfc8b6874961e4232dfaaa50969be"
   },
   {
-    "archivo": "22-kerberos-aes-administrador.png",
+    "archivo": "02-usuarios-dns-dhcp-gpo/22-kerberos-aes-administrador.png",
     "origen": "image(20261015-062931).png",
     "sha256": "4631f1abe3bab5e92089d87eb265ce4cce6e948182fa9cb07cc3bc9df231d181"
   }
